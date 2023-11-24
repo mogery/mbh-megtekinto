@@ -15088,8 +15088,6 @@ thead {
 
         reader.addEventListener("load", () => {
             let file = reader.result;
-            console.log(file)
-            
 
             const styleFilename = Object.keys(styles).find(x => file.includes(x));
             file = file.replace(new RegExp(".*" + styleFilename + ".*"), "");
@@ -15104,10 +15102,10 @@ thead {
             const xmlDom = parser.parseFromString(file, "application/xml");
             const doc = xsltProcessor.transformToDocument(xmlDom);
 
-            frame.srcdoc = new XMLSerializer().serializeToString(doc);
-			setTimeout(() => {
+    		frame.srcdoc = new XMLSerializer().serializeToString(doc);
+			setTimeout(() => { // TODO: nincs valami event erre? onfinsihedloading vagy vmi?
 				frame.contentWindow.print();
-			}, 150)
+			}, 150);
         });
 
         reader.readAsText(file, "iso-8859-2");
